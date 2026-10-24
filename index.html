@@ -77,8 +77,10 @@
       .home-note { text-align: center; margin-top: 26px; color: var(--ink-soft); font-weight: 600; font-size: 15px; }
       .contact-line { text-align: center; margin-top: 20px; margin-bottom: 4px; color: var(--ink-soft); font-size: 13px; font-weight: 500; line-height: 1.7; }
       .contact-line a { color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
-      /* Ẩn toàn bộ giao diện báo lỗi/góp ý trên bản fork của Danh (giữ code để khôi phục khi cần). */
-      #report-panel-home, #q-report-btn { display: none !important; }
+      /* Nút báo lỗi trong màn câu hỏi vẫn ẩn hẳn (theo yêu cầu ẩn tất cả trước đó).
+         Panel báo lỗi ở trang chủ thì không còn ẩn hẳn nữa mà chuyển sang
+         ẩn/hiện bằng icon, theo yêu cầu mới — nên nó không còn ở đây. */
+      #q-report-btn { display: none !important; }
 
       /* ---------- TOPICS ---------- */
       .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
@@ -353,6 +355,13 @@
       .sound-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
       .sound-head .sound-title { font-size: 19px; font-weight: 800; flex: 1; min-width: 120px; }
       .sound-master { border-radius: 14px; padding: 9px 14px; font-size: 15px; font-weight: 800; background: var(--bg); border: 3px solid var(--line); }
+      /* Nút icon ẩn/hiện panel (Danh yêu cầu 2026-10-24): panel mặc định ẩn,
+         bấm icon thì hiện ra để chỉnh, bấm lại thì ẩn. Nút đứng ngoài panel
+         nên khi panel ẩn nút vẫn còn để mở lại được. */
+      .panel-toggle-row { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+      .panel-toggle { width: 52px; height: 52px; border-radius: 18px; background: var(--card); border: 3px solid var(--line); box-shadow: 0 4px 0 var(--line); font-size: 26px; line-height: 1; cursor: pointer; }
+      .panel-toggle:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--line); }
+      .panel-toggle[aria-expanded="true"] { background: var(--bg-soft); }
       .sound-master:active { transform: translateY(2px); }
       .sound-rows { display: flex; gap: 10px; flex-wrap: wrap; }
       .sw-row { display: flex; align-items: center; gap: 10px; border-radius: 16px; padding: 9px 12px; background: var(--bg); border: 3px solid var(--line); font-size: 16px; font-weight: 800; flex: 1 1 150px; justify-content: space-between; }
@@ -402,7 +411,11 @@
       <!-- HOME -->
       <section class="screen" id="scr-home">
         <div id="profile-bar"></div>
-        <div class="sound-panel" id="sound-panel-home">
+        <div class="panel-toggle-row">
+          <button class="panel-toggle" type="button" aria-label="Hiện hoặc ẩn thiết lập âm thanh" title="Âm thanh" aria-expanded="false" onclick="var p=document.getElementById('sound-panel-home'); p.hidden=!p.hidden; this.setAttribute('aria-expanded', String(!p.hidden));">🔊</button>
+          <button class="panel-toggle" type="button" aria-label="Hiện hoặc ẩn báo lỗi câu hỏi" title="Báo lỗi" aria-expanded="false" onclick="var p=document.getElementById('report-panel-home'); p.hidden=!p.hidden; this.setAttribute('aria-expanded', String(!p.hidden));">🚩</button>
+        </div>
+        <div class="sound-panel" id="sound-panel-home" hidden>
           <div class="sound-head">
             <span class="sound-title">🔊 Âm thanh</span>
             <button class="sound-master" id="btn-test-voice" type="button">🔊 Nghe thử giọng</button>
@@ -501,7 +514,10 @@
             <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
           </div>
         </div>
-        <div class="sound-panel compact" id="sound-panel-game">
+        <div class="panel-toggle-row">
+          <button class="panel-toggle" type="button" aria-label="Hiện hoặc ẩn thiết lập âm thanh" title="Âm thanh" aria-expanded="false" onclick="var p=document.getElementById('sound-panel-game'); p.hidden=!p.hidden; this.setAttribute('aria-expanded', String(!p.hidden));">🔊</button>
+        </div>
+        <div class="sound-panel compact" id="sound-panel-game" hidden>
           <div class="sound-head">
             <span class="sound-title">🔊 Âm thanh</span>
             <button class="sound-master" data-audio-master type="button">🔇 Tắt tất cả</button>
