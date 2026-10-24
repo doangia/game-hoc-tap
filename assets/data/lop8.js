@@ -61,7 +61,7 @@ function m8SqMinus() { var a = rand(2, 9); var ans = "x² − " + (2 * a) + "x +
 function m8DiffSqNum() { var a = rand(5, 15), b = rand(2, a - 1); return numMCQ6("Tính nhanh bằng hằng đẳng thức hiệu hai bình phương!", a + "² − " + b + "²", a * a - b * b, a + "² − " + b + "² = (" + a + " − " + b + ")(" + a + " + " + b + ") = " + (a - b) + " × " + (a + b) + " = " + (a * a - b * b) + ".", 12); }
 function m8DiffSqPoly() { var a = rand(2, 9); var ans = "(x − " + a + ")(x + " + a + ")"; return mcqQ("Phân tích x² − " + (a * a) + " thành nhân tử:", ["(x − " + a + ")²", "(x + " + a + ")²", "x(x − " + (a * a) + ")"], ans, "a² − b² = (a − b)(a + b) nên x² − " + (a * a) + " = " + ans + "."); }
 function m8CubePlus() { var a = rand(2, 4); var ans = "x³ + " + (3 * a) + "x² + " + (3 * a * a) + "x + " + (a * a * a); return mcqQ("Khai triển (x + " + a + ")³ được kết quả nào?", ["x³ + " + (a * a * a), "x³ + " + (3 * a * a) + "x² + " + (3 * a) + "x + " + (a * a * a), "x³ + " + (3 * a) + "x² + " + (3 * a) + "x + " + (a * a * a)], ans, "(a + b)³ = a³ + 3a²b + 3ab² + b³ nên (x + " + a + ")³ = " + ans + "."); }
-function m8FactorQuad() { var r1 = rand(1, 6), r2 = rand(1, 6); while (r2 === r1) r2 = rand(1, 6); var s = r1 + r2, p = r1 * r2; var ans = "(x + " + r1 + ")(x + " + r2 + ")"; return mcqQ("Phân tích đa thức x² + " + s + "x + " + p + " thành nhân tử:", ["(x + " + s + ")(x + " + p + ")", "(x − " + r1 + ")(x − " + r2 + ")", "(x + " + (r1 + 1) + ")(x + " + (r2 - 1) + ")"], ans, "Cần hai số có tổng " + s + " và tích " + p + ": đó là " + r1 + " và " + r2 + ". Vậy x² + " + s + "x + " + p + " = " + ans + "."); }
+function m8FactorQuad() { var r1 = rand(1, 6), r2 = rand(1, 6); while (r2 === r1 || r2 === r1 + 1) r2 = rand(1, 6); var s = r1 + r2, p = r1 * r2; var ans = "(x + " + r1 + ")(x + " + r2 + ")"; return mcqQ("Phân tích đa thức x² + " + s + "x + " + p + " thành nhân tử:", ["(x + " + s + ")(x + " + p + ")", "(x − " + r1 + ")(x − " + r2 + ")", "(x + " + (r1 + 1) + ")(x + " + (r2 - 1) + ")"], ans, "Cần hai số có tổng " + s + " và tích " + p + ": đó là " + r1 + " và " + r2 + ". Vậy x² + " + s + "x + " + p + " = " + ans + "."); }
 function m8SumSqNum() { var a = rand(3, 12), b = rand(2, 9); return numMCQ6("Tính (a + b)² với a = " + a + ", b = " + b + "!", "(" + a + " + " + b + ")²", (a + b) * (a + b), "(a + b)² = a² + 2ab + b² = " + (a * a) + " + " + (2 * a * b) + " + " + (b * b) + " = " + ((a + b) * (a + b)) + ".", 15); }
 var M8C2_FACTS = [
   ["Hằng đẳng thức (a + b)² bằng gì?", "a² + 2ab + b²", "a² + b²", "a² + ab + b²", "Bình phương của một tổng bằng tổng các bình phương cộng hai lần tích."],
@@ -79,7 +79,7 @@ var QUADS8 = ["Hình vuông", "Hình chữ nhật", "Hình bình hành", "Hình 
 function m8ShapeID() { var kind = pick(QUADS8); var wrongs = shuffle(QUADS8.filter(function (x) { return x !== kind; })).slice(0, 3); return mcqQ("Hình vẽ dưới đây là hình gì?", wrongs, kind, "Dựa vào đặc điểm các cạnh và góc của hình để nhận diện.", quadSVG8(kind)); }
 function m8QuadAngle() { var a = rand(60, 120), b = rand(60, 120), c = rand(60, 110); var d = 360 - a - b - c; return numMCQ6("Tứ giác ABCD có góc A = " + a + "°, góc B = " + b + "°, góc C = " + c + "°. Góc D bằng bao nhiêu độ?", "∠D = ?", d, "Tổng bốn góc của một tứ giác bằng 360°: 360° − " + a + "° − " + b + "° − " + c + "° = " + d + "°.", 15); }
 function m8ParaAngle() { var a = rand(55, 130); return numMCQ6("Hình bình hành ABCD có góc A = " + a + "°. Góc B kề với góc A bằng bao nhiêu độ?", "∠B = ?", 180 - a, "Hai góc kề một cạnh của hình bình hành bù nhau (tổng 180°): 180° − " + a + "° = " + (180 - a) + "°.", 15); }
-function m8TrapAngle() { var a = rand(55, 120); return numMCQ6("Hình thang cân ABCD (AB ∥ CD) có góc A = " + a + "° ở đáy lớn CD. Góc D bằng bao nhiêu độ?", "∠D = ?", a, "Hình thang cân có hai góc kề một đáy bằng nhau: góc A = góc D = " + a + "°.", 12); }
+function m8TrapAngle() { var a = rand(55, 120); return numMCQ6("Hình thang cân ABCD (AB ∥ CD) có góc A = " + a + "°. Góc B bằng bao nhiêu độ?", "∠B = ?", a, "Hình thang cân có hai góc kề một đáy bằng nhau: góc A = góc B = " + a + "°.", 12); }
 var M8C3_FACTS = [
   ["Tổng các góc của một tứ giác bằng bao nhiêu?", "360°", "180°", "540°", "Mọi tứ giác đều có tổng bốn góc bằng 360°."],
   ["Hình thang cân có tính chất nào?", "Hai góc kề một đáy bằng nhau và hai đường chéo bằng nhau", "Hai cạnh bên song song", "Bốn cạnh bằng nhau", "Hình thang cân còn có hai cạnh bên bằng nhau."],
@@ -110,7 +110,7 @@ var CHART8_SETS = [
   { labels: ["Cam", "Táo", "Xoài", "Ổi"], topic: "số ki-lô-gam trái cây bán được" }
 ];
 function m8Chart() {
-  var set = pick(CHART8_SETS); var vals = [rand(4, 18), rand(4, 18), rand(4, 18), rand(4, 18)];
+  var set = pick(CHART8_SETS); var vals = [rand(4, 18), rand(4, 18), rand(4, 18), rand(4, 18)]; var guard8 = 0; while (vals.filter(function (v) { return v === Math.max.apply(null, vals); }).length !== 1 && guard8++ < 100) { vals = [rand(4, 18), rand(4, 18), rand(4, 18), rand(4, 18)]; }
   var vis = chartSVG8(set.labels, vals); var v = rand(0, 2);
   if (v === 0) { var tot = vals.reduce(function (s, x) { return s + x; }, 0); var q0 = numMCQ6("Biểu đồ cột cho biết " + set.topic + ". Tổng số lượng là bao nhiêu?", "", tot, "Cộng các cột: " + vals.join(" + ") + " = " + tot + ".", 6); q0.visual = vis; return q0; }
   if (v === 1) { var mx = Math.max.apply(null, vals); var lab = set.labels[vals.indexOf(mx)]; var wrongs = set.labels.filter(function (l) { return l !== lab; }); return mcqQ("Biểu đồ cột cho biết " + set.topic + ". Mục nào có số lượng LỚN NHẤT?", wrongs, lab, "Cột cao nhất ứng với " + lab + " (" + mx + ").", vis); }
@@ -128,7 +128,7 @@ var M8C5_FACTS = [
    phân số (đợt sửa phân số 2026-10-15); toán hạng không nguyên giữ nguyên dạng. */
 function opFrac8(n, d) { return n % d === 0 ? String(n / d) : n + "/" + d; }
 function m8FracCond() { var k = rand(2, 9); return mcqQ("Phân thức 7/(x − " + k + ") xác định (có nghĩa) khi nào?", ["x = " + k, "x ≠ 0", "Mọi giá trị của x"], "x ≠ " + k, "Phân thức xác định khi mẫu thức khác 0: x − " + k + " ≠ 0 → x ≠ " + k + "."); }
-function m8FracSimplify() { var d = pick([4, 6, 8, 9, 10, 12]), n = rand(1, d - 1); var g = gcd6(n * rand(2, 4), d * 1); var mult = pick([2, 3, 4]); return frMCQ6("Rút gọn phân số (dạng số của phân thức) sau!", n * mult, d * mult, "Chia cả tử và mẫu cho ước chung lớn nhất " + mult + " (hoặc lớn hơn): được " + fr6(n * mult, d * mult) + "."); }
+function m8FracSimplify() { var d = pick([4, 6, 8, 9, 10, 12]), n = rand(1, d - 1); var mult = pick([2, 3, 4]); var g = gcd6(n * mult, d * mult); var q = frMCQ6("Rút gọn phân số " + (n * mult) + "/" + (d * mult) + " (dạng số của phân thức)!", n * mult, d * mult, "Chia cả tử và mẫu cho ước chung lớn nhất " + g + ": được " + fr6(n * mult, d * mult) + "."); q.visual = '<div class="expr">' + (n * mult) + "/" + (d * mult) + " = ?</div>"; return q; }
 function m8FracAddSame() { var d = pick([5, 6, 7, 8, 9]), a = rand(1, d - 1), b = rand(1, d - a); return frMCQ6("Tính " + a + "/" + d + " + " + b + "/" + d + " = ?", a + b, d, "Cùng mẫu: cộng hai tử, giữ nguyên mẫu: (" + a + " + " + b + ")/" + d + " = " + fr6(a + b, d) + "."); }
 function m8FracMul() { var a = rand(1, 5), b = rand(2, 6), c = rand(1, 5), d = rand(2, 6); return frMCQ6("Tính tích (" + opFrac8(a, b) + ") × (" + opFrac8(c, d) + ") = ?", a * c, b * d, "Nhân tử với tử, mẫu với mẫu rồi rút gọn: " + fr6(a * c, b * d) + "."); }
 function m8FracVal() { var a = rand(1, 6), b = rand(1, 6), k = rand(2, 6); return frMCQ6("Tính giá trị của phân thức (x + " + a + ")/(x + " + b + ") tại x = " + k + "!", k + a, k + b, "Thay x = " + k + ": (" + k + " + " + a + ")/(" + k + " + " + b + ") = " + (k + a) + "/" + (k + b) + " = " + fr6(k + a, k + b) + "."); }
@@ -486,7 +486,7 @@ var NV8_TOPICS = [
     ["Bài viết “Nắng mới — sự thành thực của một tâm hồn giàu mơ mộng” (thực hành đọc) phân tích bài thơ “Nắng mới” của nhà thơ nào?", "Lưu Trọng Lư — nhà thơ tiêu biểu của phong trào Thơ mới", "Hàn Mặc Tử", "Xuân Diệu", "“Nắng mới” là bài thơ nổi tiếng của Lưu Trọng Lư; bài phê bình do Lê Quang Hưng viết."],
     ["Chủ điểm “Nhà văn và trang viết” của Bài 8 muốn nói điều gì?", "Về nghề viết văn, về cách đọc – hiểu tác phẩm và những đánh giá sâu sắc về các nhà văn lớn", "Về nghề in sách", "Về các nhà xuất bản", "Bài 8 giúp học sinh hiểu thêm “bếp núc” của văn chương."],
     ["Khi đọc một tác phẩm văn học, thái độ nào là đúng?", "Đọc kĩ, suy ngẫm, liên hệ và rút ra ý nghĩa cho bản thân; tôn trọng cảm nhận riêng có căn cứ", "Đọc lướt cho xong nhiệm vụ", "Chỉ chép lại lời giảng", "Đọc văn là cuộc chơi trí tuệ đầy hứng thú."],
-    ["Nguyễn Khuyến sống ở thế kỉ nào?", "Thế kỉ XIX (1825–1909), cuối thời Nguyễn", "Thế kỉ XX", "Thế kỉ XVIII", "Ông thi đỗ tam nguyên dưới triều Tự Đức."],
+    ["Nguyễn Khuyến sống ở thế kỉ nào?", "Thế kỉ XIX (1835–1909), cuối thời Nguyễn", "Thế kỉ XX", "Thế kỉ XVIII", "Ông thi đỗ tam nguyên dưới triều Tự Đức."],
     ["Từ “trang viết” trong chủ điểm Bài 8 gợi liên tưởng gì?", "Trang văn, tác phẩm — kết tinh của lao động sáng tạo và tâm huyết của nhà văn", "Trang giấy trắng chưa viết", "Trang bìa của cuốn sách", "Mỗi trang viết chứa đựng tâm hồn của nhà văn."],
     ["Văn bản “Nhà thơ của quê hương làng cảnh Việt Nam” viết về nhà thơ nào?", "Nguyễn Khuyến", "Nguyễn Du", "Tú Xương", "Bài viết của Xuân Diệu bàn về thơ Nguyễn Khuyến."],
     ["Tác giả của văn bản “Nhà thơ của quê hương làng cảnh Việt Nam” là ai?", "Xuân Diệu", "Hoài Thanh", "Chế Lan Viên", "Văn bản là bài nghiên cứu của Xuân Diệu."],
@@ -495,9 +495,9 @@ var NV8_TOPICS = [
     ["Trần Đình Sử được biết đến với vai trò chính là gì?", "Nhà nghiên cứu, phê bình văn học", "Nhà viết kịch", "Nhà văn viết truyện ngắn", "Trần Đình Sử là nhà lí luận, phê bình văn học."],
     ["Truyện “Xe đêm” là sáng tác của nhà văn nào?", "Côn-xtan-tin Pau-xtốp-xki", "Sê-khốp", "Puskin", "“Xe đêm” là truyện của nhà văn Nga Pau-xtốp-xki."],
     ["Pau-xtốp-xki là nhà văn của nước nào?", "Nga", "Pháp", "Đức", "Pau-xtốp-xki là nhà văn Nga nổi tiếng."],
-    ["Bài viết về “Nắng mới” phân tích bài thơ của nhà thơ nào?", "Hàn Mặc Tử", "Xuân Diệu", "Huy Cận", "“Nắng mới” là bài thơ của Hàn Mặc Tử."],
+    ["Bài viết về “Nắng mới” phân tích bài thơ của nhà thơ nào?", "Lưu Trọng Lư", "Xuân Diệu", "Huy Cận", "“Nắng mới” là bài thơ của Lưu Trọng Lư."],
     ["Tác giả bài viết phân tích thơ “Nắng mới” là ai?", "Lê Quang Hưng", "Xuân Diệu", "Trần Đình Sử", "Bài viết là của Lê Quang Hưng."],
-    ["Bài thơ “Nắng mới” nằm trong tập thơ nào của Hàn Mặc Tử?", "Tập Thơ điên", "Tập Thơ thơ", "Tập Hoa niên", "“Nắng mới” thuộc tập “Thơ điên” của Hàn Mặc Tử."],
+    ["Bài thơ “Nắng mới” nằm trong tập thơ nào của Lưu Trọng Lư?", "Tập Tiếng Thu", "Tập Thơ thơ", "Tập Hoa niên", "“Nắng mới” thuộc tập “Tiếng Thu” của Lưu Trọng Lư."],
     ["Hàn Mặc Tử có tên thật là gì?", "Nguyễn Trọng Trí", "Nguyễn Xuân Diệu", "Nguyễn Bính", "Hàn Mặc Tử tên thật là Nguyễn Trọng Trí."],
     ["Xuân Diệu quê ở địa phương nào?", "Hà Tĩnh", "Nghệ An", "Quảng Bình", "Xuân Diệu quê ở Can Lộc, Hà Tĩnh."],
     ["Văn bản phê bình văn học có nhiệm vụ chính là gì?", "Phân tích, đánh giá tác phẩm văn học", "Kể lại cốt truyện tác phẩm", "Dịch tác phẩm ra tiếng khác", "Phê bình văn học giúp phân tích và đánh giá giá trị tác phẩm."],

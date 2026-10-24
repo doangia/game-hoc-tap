@@ -3304,7 +3304,10 @@ function valueKeyOf(html) {
       var base = clockSVG(h);
       var ma = m*6;
       var minuteHand = '<g transform="rotate('+ma+' 100 100)"><line x1="100" y1="100" x2="100" y2="26" stroke="#12b5a5" stroke-width="6" stroke-linecap="round"/></g>';
-      return base.replace('<circle cx="100" cy="100" r="9"', minuteHand+'<circle cx="100" cy="100" r="9"');
+      /* Sửa lỗi thừa kim phút: clockSVG đã vẽ sẵn một kim dài đen ở 12 (giờ đúng).
+         clockSVG2 chỉ được giữ kim phút xoay theo m, nên xóa kim đen gốc trước. */
+      var blackMinute = '<line x1="100" y1="100" x2="100" y2="34" stroke="#33302a" stroke-width="7" stroke-linecap="round"/>';
+      return base.replace(blackMinute, '').replace('<circle cx="100" cy="100" r="9"', minuteHand+'<circle cx="100" cy="100" r="9"');
     }
     /* ---------- hàm topic() (định nghĩa gốc nằm giữa khối Lớp 2 trong master) ---------- */
         function topic(id, emoji, name, sub, facts, pairs, mp){ return { id:id, emoji:emoji, name:name, sub:sub, pools: knowledgePools(facts, pairs, mp) }; }

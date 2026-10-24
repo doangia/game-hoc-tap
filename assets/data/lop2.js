@@ -210,20 +210,20 @@
     var UNITS2 = [
       { n:1, letter:"Pp", place:"At my birthday party", words:[["pasta","🍝","mì Ý"],["popcorn","🍿","bỏng ngô"],["pizza","🍕","bánh pizza"]], pattern:{q:"The popcorn is …?", a:"yummy", w:["yummy","sad","blue"]} },
       { n:2, letter:"Kk", place:"In the backyard", words:[["kite","🪁","cái diều"],["bike","🚲","xe đạp"],["kitten","🐱","mèo con"]], pattern:{q:"Is she flying a kite?", a:"Yes, she is.", w:["Yes, she is.","No, she is.","Yes, I am."]} },
-      { n:3, letter:"Ss", place:"At the seaside", words:[["sail","⛵","thuyền buồm"],["sand","🏖️","cát"],["sea","🌊","biển"]], pattern:{q:"Let's look at the …!", a:"sea", w:["sea","sand","sail"]} },
-      { n:4, letter:"Rr", place:"In the countryside", words:[["rainbow","🌈","cầu vồng"],["river","🏞️","con sông"],["road","🛣️","con đường"]], pattern:{q:"What can you see? — I can see a …", a:"rainbow", w:["rainbow","river","road"]} },
+      { n:3, letter:"Ss", place:"At the seaside", words:[["sail","⛵","cánh buồm"],["sand","🏖️","cát"],["sea","🌊","biển"]], pattern:{q:"Let's look at the waves in the …!", a:"sea", w:["sea","sand","sail"]} },
+      { n:4, letter:"Rr", place:"In the countryside", words:[["rainbow","🌈","cầu vồng"],["river","🏞️","con sông"],["road","🛣️","con đường"]], pattern:{q:"What can you see in the sky? — I can see a …", a:"rainbow", w:["rainbow","river","road"]} },
       { n:5, letter:"Qq", place:"In the classroom", words:[["question","❓","câu hỏi"],["square","⬜","hình vuông"],["quiz","📝","bài đố vui"]], pattern:{q:"What's he doing? — He's doing a …", a:"quiz", w:["quiz","question","square"]} },
       { n:6, letter:"Xx", place:"On the farm", words:[["box","📦","cái hộp"],["fox","🦊","con cáo"],["ox","🐂","con bò đực"]], pattern:{q:"Is there a fox?", a:"Yes, there is.", w:["Yes, there is.","No, it isn't.","Yes, I can."]} },
       { n:7, letter:"Jj", place:"In the kitchen", words:[["juice","🧃","nước ép"],["jelly","🍮","thạch"],["jam","🫙","mứt"]], pattern:{q:"Pass me the jam, please. — …", a:"Here you are.", w:["Here you are.","Thank you.","Goodbye."]} },
       { n:8, letter:"Vv", place:"In the village", words:[["village","🏘️","ngôi làng"],["van","🚐","xe van"],["volleyball","🏐","bóng chuyền"]], pattern:{q:"Can you draw a van?", a:"Yes, I can.", w:["Yes, I can.","No, I don't.","Yes, there is."]} },
-      { n:9, letter:"Yy", place:"In the grocery store", words:[["yogurt","🥣","sữa chua"],["yams","🍠","khoai"],["yo-yos","🪀","đồ chơi yo-yo"]], pattern:{q:"What do you want? — I want some …", a:"yams", w:["yams","yogurt","yo-yos"]} },
+      { n:9, letter:"Yy", place:"In the grocery store", words:[["yogurt","🥣","sữa chua"],["yams","🍠","khoai"],["yo-yos","🪀","đồ chơi yo-yo"]], pattern:{q:"What do you want from the garden? — I want some …", a:"yams", w:["yams","yogurt","yo-yos"]} },
       { n:10, letter:"Zz", place:"At the zoo", words:[["zoo","🦒","vườn thú"],["zebu","🐃","bò u"],["zebra","🦓","ngựa vằn"]], pattern:{q:"Do you like the zoo?", a:"Yes, I do.", w:["Yes, I do.","No, I can't.","Yes, she is."]} },
       { n:11, letter:"Ii", place:"In the playground", words:[["sliding","🛝","trượt cầu trượt"],["riding","🚴","đi xe đạp"],["driving","🚗","lái xe"]], pattern:{q:"What are they doing? — They're … cars.", a:"driving", w:["driving","sliding","riding"]} },
       { n:12, letter:"Aa", place:"At the café", words:[["grapes","🍇","nho"],["cake","🎂","bánh kem"],["table",SVG_DESK,"cái bàn"]], pattern:{q:"The cake is … the table.", a:"on", w:["on","in","under"], prep:true} },
       { n:13, letter:"Nn", place:"In the maths class", words:[["eleven","11","số 11"],["thirteen","13","số 13"],["fourteen","14","số 14"],["fifteen","15","số 15"]], pattern:{q:"What number is it? — It's …", a:"eleven", w:["eleven","thirteen","fifteen"]} },
       { n:14, letter:"Er", place:"At home", words:[["brother","👦","anh/em trai"],["sister","👧","chị/em gái"],["grandmother","👵","bà"]], pattern:{q:"How old is your brother? — He's …", a:"nineteen", w:["nineteen","fine","happy"]} },
       { n:15, letter:"Sh", place:"In the clothes shop", words:[["shirts","👕","áo sơ mi"],["shoes","👟","giày"],["shorts","🩳","quần đùi"]], pattern:{q:"Where are the shoes? — …", a:"Over there.", w:["Over there.","Yes, I can.","It's eleven."]} },
-      { n:16, letter:"Tt", place:"At the campsite", words:[["tent","⛺","cái lều"],["teapot","🫖","ấm trà"],["blanket","🛏️","cái chăn"]], pattern:{q:"Is the blanket near the tent? — No, it isn't. It's … the tent.", a:"in", w:["in","on","near"], prep:true} }
+      { n:16, letter:"Tt", place:"At the campsite", words:[["tent","⛺","cái lều"],["teapot","🫖","ấm trà"],["blanket","🛏️","cái chăn"]], pattern:{q:"The blanket is not outside. It's … the tent.", a:"in", w:["in","on","near"], prep:true} }
     ];
     var ALL_WORDS2 = []; UNITS2.forEach(function(u){ u.words.forEach(function(w){ ALL_WORDS2.push(w); }); });
     function eng2Pools(u){
@@ -672,7 +672,6 @@ function g2PreSuccWord100() {
     pushFacts127(t, [
       ["Túi có 5 viên bi, tất cả đều màu đỏ. Em chắc chắn lấy được viên bi màu gì?", "Màu đỏ", "Màu xanh", "Màu vàng", "Cả túi chỉ có bi đỏ nên chắc chắn lấy được bi đỏ."],
       ["Ngày mai trời có thể mưa. Từ nào chỉ khả năng trong câu này?", "có thể", "chắc chắn", "không thể", "“Có thể” nói về việc chưa chắc chắn xảy ra."],
-      ["Cá có thể sống ở đâu?", "Dưới nước", "Trên cây", "Trên bầu trời", "Cá sống dưới nước, không thể sống trên cây hay bầu trời."],
       ["Khi đếm số ô trong biểu đồ tranh, mỗi hình vẽ tượng trưng cho mấy vật?", "Thường là 1 vật (theo chú thích)", "Luôn là 10 vật", "Không tượng trưng gì cả", "Đọc chú thích của biểu đồ: thường mỗi hình là 1 vật."]
     ]);
   }
