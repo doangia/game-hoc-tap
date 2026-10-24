@@ -77,6 +77,8 @@
       .home-note { text-align: center; margin-top: 26px; color: var(--ink-soft); font-weight: 600; font-size: 15px; }
       .contact-line { text-align: center; margin-top: 20px; margin-bottom: 4px; color: var(--ink-soft); font-size: 13px; font-weight: 500; line-height: 1.7; }
       .contact-line a { color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+      /* Ẩn toàn bộ giao diện báo lỗi/góp ý trên bản fork của Danh (giữ code để khôi phục khi cần). */
+      #report-panel-home, #q-report-btn { display: none !important; }
 
       /* ---------- TOPICS ---------- */
       .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
@@ -415,7 +417,7 @@
           <div class="sound-note voice-warn" id="voice-warn" hidden>⚠️ Thiết bị này chưa có giọng nói hệ thống; câu khen thu sẵn vẫn phát bình thường — phần đọc câu hỏi và nghe tiếng Anh cần máy có sẵn giọng đọc.</div>
           <div class="sound-note">Câu khen dùng giọng nữ thu sẵn ngay trong game — máy nào cũng nghe giống nhau, không cần cài thêm giọng cho máy. Bố mẹ có thể tắt từng loại âm thanh ở đây, lựa chọn được nhớ cho lần chơi sau.</div>
         </div>
-        <div class="sound-panel" id="report-panel-home">
+        <div class="sound-panel" id="report-panel-home" hidden>
           <div class="sound-head">
             <span class="sound-title">🚩 Báo lỗi câu hỏi</span>
           </div>
@@ -514,7 +516,7 @@
           <div class="q-badge" id="q-badge"></div>
           <p class="q-prompt" id="q-prompt"></p>
           <button id="q-speak-btn" class="q-speak-btn" type="button">🔊 Nghe câu hỏi</button>
-          <button id="q-report-btn" class="q-report-btn" type="button" title="Báo câu hỏi có vấn đề">🚩 Báo lỗi</button>
+          <button id="q-report-btn" class="q-report-btn" type="button" title="Báo câu hỏi có vấn đề" hidden>🚩 Báo lỗi</button>
           <div class="q-visual" id="q-visual"></div>
           <div class="options" id="q-options"></div>
           <div class="feedback" id="q-feedback" role="status"></div>
