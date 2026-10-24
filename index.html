@@ -3172,6 +3172,28 @@ function valueKeyOf(html) {
        thiếu thì lấp bằng hai nhiễu gốc do tác giả viết. */
     function kpTypedWrongs(f, sib){
       var authored = [f[2], f[3]];
+      /* Sửa 2026-10-24 (Danh duyệt): đáp án là câu chữ tự do (nhóm CONLAI)
+         thì "cùng loại" gần như không có nghĩa — mọi câu chữ đều cùng loại —
+         nên máy hay lôi đáp án câu khác làm nhiễu (vd câu "người lạ gõ cửa"
+         bị nhiễu bằng "Thế hệ nhỏ nhất"). Với CONLAI, ưu tiên nhiễu do tác
+         giả viết sẵn cho chính câu đó; chỉ khi tác giả viết thiếu mới lấp
+         bằng nhiễu cùng loại. Các nhóm có loại rõ (số, năm, ngày, người,
+         địa danh) giữ nguyên hành vi cũ. Nếu bộ phân loại chưa nạp thì
+         cũng giữ hành vi cũ để không vô tình tắt thang cùng loại. */
+      try {
+        if (window.__typeLeak && typeof window.__typeLeak.typeOf === "function" && window.__typeLeak.typeOf(f[1]) === "CONLAI") {
+          var first = [];
+          for (var k = 0; k < authored.length; k++) { if (authored[k] && authored[k] !== f[1] && first.indexOf(authored[k]) === -1) first.push(authored[k]); }
+          if (first.length >= 2) return first.slice(0, 2);
+          if (sib && sib.length >= 2 && window.__typedWrongs) {
+            var cands0 = [];
+            for (var i0 = 0; i0 < sib.length; i0++) { var x0 = sib[i0]; if (x0 && x0 !== f && x0[1] && x0[1] !== f[1]) cands0.push(x0[1]); }
+            var typed0 = window.__typedWrongs({ a: f[1] }, cands0, 2, null) || [];
+            for (var j0 = 0; j0 < typed0.length && first.length < 2; j0++) { if (typed0[j0] && typed0[j0] !== f[1] && first.indexOf(typed0[j0]) === -1) first.push(typed0[j0]); }
+          }
+          return first.length ? first : authored;
+        }
+      } catch (e) {}
       try {
         if (!sib || sib.length < 2 || !window.__typedWrongs) return authored;
         var cands = [];
@@ -13133,6 +13155,27 @@ window.__ensureGrade = function (g, cb) {
        trị đứng cạnh nhau). Đáp án không thuộc họ có loại rõ → __typedWrongs
        trả null → hành vi cũ nguyên vẹn. */
     var local7 = seeds.concat(facts.map(function (x) { return x.a; }));
+    /* Sửa 2026-10-24 (Danh duyệt), cùng nguyên tắc như kpTypedWrongs:
+       đáp án câu chữ tự do (CONLAI) thì ưu tiên hạt giống nhiễu do tác
+       giả viết sẵn (f.wrongs); chỉ khi thiếu mới lấp bằng nhiễu cùng
+       loại rồi đáp án các dữ kiện khác. Nhóm có loại rõ giữ nguyên. */
+    if (window.__typeLeak && typeof window.__typeLeak.typeOf === "function" && window.__typeLeak.typeOf(f.a) === "CONLAI") {
+      var outC = seeds.slice(0, n);
+      if (outC.length < n) {
+        var typedC = (typeof window.__typedWrongs === "function") ? window.__typedWrongs(f, local7, n, ctx) : null;
+        (typedC || []).forEach(function (a) { if (outC.length < n && a !== f.a && outC.indexOf(a) === -1) outC.push(a); });
+      }
+      if (outC.length < n) {
+        for (var ic = 0; ic < facts.length && outC.length < n; ic++) {
+          var ac = facts[ic].a;
+          if (!String(ac == null ? "" : ac).trim()) continue;
+          var fmtOKC = (typeof window.__engFmtOK === "function") ? window.__engFmtOK(f, facts[ic]) : true;
+          var noWC = (typeof window.__engNoWrong === "function") ? window.__engNoWrong(f, facts[ic]) : false;
+          if (ac !== f.a && outC.indexOf(ac) === -1 && fmtOKC && !noWC && !facts[ic].crossUnitWord) outC.push(ac);
+        }
+      }
+      return outC.slice(0, n);
+    }
     var typed7 = (typeof window.__typedWrongs === "function") ? window.__typedWrongs(f, local7, n, ctx) : null;
     var out = typed7 ? typed7.slice() : [];
     var chosenCanon7 = null, ty7 = null, sub7 = null;
